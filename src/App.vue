@@ -1,28 +1,45 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+          <input type="text" v-model="name"> </input>
+        <select v-model="type">
+          <option value="high">High</option>
+          <option value="low">Low</option>
+        </select>
+        <button @click="addToDo">Add</button>
+    <ul>
+    <li v-for="(toDo,index) in toDoList" :key="index">
+      {{toDo.name}} - {{toDo.type == "high" ? "!" : ""}}
+      <button @click="removetoDo(index)">X</button>
+    </li>
+
+    </ul>
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
-
 export default {
   name: "app",
+  data () {
+    return {
+      name : "",
+      type: "high",
+      toDoList: []
+   }
+  },
   components: {
-    HelloWorld
+  },
+  methods: {
+    addToDo: function () {
+      let obj = {
+        name: this.name,
+        type: this.type
+      };
+      this.toDoList.push(obj);
+    },
+    removetoDo: function(index){
+      this.toDoList.splice(index,1);
+    }
   }
 };
 </script>
 
-<style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
