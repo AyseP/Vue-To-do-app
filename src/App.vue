@@ -1,17 +1,17 @@
 <template>
   <div id="app">
-          <input type="text" v-model="name"> </input>
-        <select v-model="type">
-          <option value="high">High</option>
-          <option value="low">Low</option>
-        </select>
-        <button @click="addToDo">Add</button>
+    <input type="text" v-model="name">
+    <select v-model="type">
+      <option value="highest">Highest</option>
+      <option value="high">High</option>
+      <option value="low">Low</option>
+    </select>
+    <button @click="addToDo">Add</button>
     <ul>
-    <li v-for="(toDo,index) in toDoList" :key="index">
-      {{toDo.name}} - {{toDo.type == "high" ? "!" : ""}}
-      <button @click="removetoDo(index)">X</button>
-    </li>
-
+      <li v-for="(toDo,index) in toDoList" :key="index">
+        {{toDo.name}} - {{toDo.type == "high" ? "!" : "" }}
+        <button @click="removetoDo(index)">X</button>
+      </li>
     </ul>
   </div>
 </template>
@@ -19,25 +19,24 @@
 <script>
 export default {
   name: "app",
-  data () {
+  data() {
     return {
-      name : "",
+      name: "",
       type: "high",
       toDoList: []
-   }
+    };
   },
-  components: {
-  },
+  components: {},
   methods: {
-    addToDo: function () {
+    addToDo: function() {
       let obj = {
         name: this.name,
         type: this.type
       };
       this.toDoList.push(obj);
     },
-    removetoDo: function(index){
-      this.toDoList.splice(index,1);
+    removetoDo: function(index) {
+      this.toDoList.splice(index, 1);
     }
   }
 };
